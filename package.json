@@ -1,0 +1,10 @@
+{
+  "name": "geometry-dash-generator",
+  "version": "1.0.0",
+  "description": "Generate animated Geometry Dash-like SVG for GitHub profile",
+  "main": "scripts/generate-geometry.js",
+  "scripts": {
+    "generate": "node ./scripts/generate-geometry.js"
+    },
+  "dependencies": {}
+}
