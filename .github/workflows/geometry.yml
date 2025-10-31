@@ -1,0 +1,51 @@
+name: Generate Geometry Dash SVG
+
+
+on:
+schedule:
+- cron: "0 */12 * * *" # update tiap 12 jam
+workflow_dispatch:
+
+
+jobs:
+build:
+runs-on: ubuntu-latest
+
+
+steps:
+- name: Checkout repository
+uses: actions/checkout@v3
+
+
+- name: Setup Node.js
+uses: actions/setup-node@v3
+with:
+node-version: '20'
+
+
+- name: Install dependencies
+run: |
+npm --version || true
+npm install
+
+
+- name: Debug file structure
+run: |
+pwd
+ls -la
+ls -la scripts || true
+
+
+- name: Generate Geometry Dash SVG
+run: |
+mkdir -p dist
+node ./scripts/generate-geometry.js
+
+
+- name: Deploy to output branch
+uses: crazy-max/ghaction-github-pages@v3.1.0
+with:
+target_branch: output
+build_dir: dist
+env:
+GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
